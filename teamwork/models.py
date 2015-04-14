@@ -248,3 +248,10 @@ class Policy(models.Model):
             obj = self.content_object
         self.permissions.add(*(get_permission_by_name(name, obj)
                              for name in names))
+
+    def remove_permissions_by_name(self, names, obj=None):
+        from .shortcuts import get_permission_by_name
+        if obj is None:
+            obj = self.content_object
+        self.permissions.remove(*(get_permission_by_name(name, obj)
+                             for name in names))

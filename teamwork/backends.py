@@ -11,6 +11,7 @@ from .models import Team, Role, Policy
 
 
 class TeamworkBackend(object):
+
     supports_object_permissions = True
     supports_anonymous_user = True
     supports_inactive_user = True
@@ -44,22 +45,37 @@ class TeamworkBackend(object):
 
             # Try getting perms for the current object
             perms = self._get_obj_permissions(user, obj)
+            
+            #arq = open("log_teamwork.txt","w")
+            #arq.write("object permissions: "+str(perms)+"\n")
 
             # If the object yielded no perms, try traversing parents
+            # desabilitado
+            '''
             if perms is None and hasattr(obj, 'get_permission_parents'):
+
+                arq.write("traversing parents..."+"\n")
+                
                 parents = obj.get_permission_parents()
                 for parent in parents:
                     perms = self._get_obj_permissions(user, parent)
+                    
+                    arq.write(str(parent)+ " permissions: "+str(perms)+"\n")
+                    
                     if perms is not None:
                         break
-
+            '''
             # Check for policies attached to the current Site object, if any.
             if perms is None:
                 perms = self._get_site_permissions(user, obj)
+                
+                #arq.write("policies attached to the current Site object...")
 
             # Consult settings for a baseline policy.
             if perms is None:
                 perms = self._get_settings_permissions(user, obj)
+                
+                #arq.write("baseline policy perms: "+str(perms)+"\n")
 
             # If none of the above came up with permissions (even an empty
             # set), then we have an empty set.
