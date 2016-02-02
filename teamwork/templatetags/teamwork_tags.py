@@ -7,8 +7,8 @@ from __future__ import unicode_literals
 from django import template
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, AnonymousUser
-from django.template import get_library
-from django.template import InvalidTemplateLibrary
+#from django.template import get_library
+#from django.template import InvalidTemplateLibrary
 from django.template.defaulttags import LoadNode
 
 from ..shortcuts import build_policy_admin_links

@@ -4,7 +4,9 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import Permission
 
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey
+#from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.admin import GenericTabularInline
 
 from .models import Team, Role, Policy
 
@@ -51,7 +53,7 @@ class PolicyAdmin(admin.ModelAdmin):
     filter_horizontal = ('permissions', 'groups', 'users',)
 
 
-class PolicyInline(generic.GenericTabularInline):
+class PolicyInline(GenericTabularInline):
     """Policy inline editor for content objects that constrains Permission
     choices to the content type"""
     model = Policy
