@@ -4,7 +4,8 @@ from itertools import chain
 from django.conf import settings
 from django.contrib.auth.models import Permission, Group
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.sites.models import Site, get_current_site
+from django.contrib.sites.models import Site #, get_current_site
+from django.contrib.sites.shortcuts import get_current_site
 
 from . import DEFAULT_ANONYMOUS_USER_PK
 from .models import Team, Role, Policy
